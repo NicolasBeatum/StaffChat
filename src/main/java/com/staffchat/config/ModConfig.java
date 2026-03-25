@@ -1,5 +1,7 @@
 package com.staffchat.config;
 
+import net.minecraft.text.Style;
+import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +21,7 @@ public class ModConfig {
     public static class ChannelConfig {
         public String command;
         public String prefix;
-        public String color; // Name of Formatting enum
+        public String color; // Name of Formatting enum OR Hex code (e.g. #FFFFFF)
 
         public ChannelConfig() {}
 
@@ -29,9 +31,14 @@ public class ModConfig {
             this.color = color;
         }
 
-        public Formatting getFormatting() {
-            Formatting f = Formatting.byName(color);
-            return f != null ? f : Formatting.WHITE;
+        public Style getStyle() {
+            try {
+                TextColor c = TextColor.parse(color.toLowerCase()).getOrThrow();
+                return Style.EMPTY.withColor(c != null ? c : TextColor.fromFormatting(Formatting.WHITE));
+            } catch (Exception e) {
+                // Fallback to WHITE if parsing fails (e.g. invalid hex or name)
+                return Style.EMPTY.withColor(TextColor.fromFormatting(Formatting.WHITE));
+            }
         }
     }
 

@@ -162,11 +162,11 @@ public class StaffChatMod implements ModInitializer {
         ModConfig.ChannelConfig cfg = channel.getConfig();
         String format = ConfigManager.getConfig().messages.messageFormat;
         
-        Text prefixText = Text.literal(cfg.prefix).formatted(cfg.getFormatting());
+        Text prefixText = Text.literal(cfg.prefix).setStyle(cfg.getStyle());
         String lpStr = sender != null ? LuckPermsHelper.getPrefix(sender.getUuid()) : "";
         Text lpText = LuckPermsHelper.parseLegacy(lpStr);
         Text nameText = Text.literal(senderName).formatted(nameColor);
-        Text msgText = Text.literal(message).formatted(cfg.getFormatting());
+        Text msgText = Text.literal(message).setStyle(cfg.getStyle());
 
         MutableText formattedMessage = Text.empty();
         String[] parts = format.split("%", -1);
@@ -178,11 +178,11 @@ public class StaffChatMod implements ModInitializer {
                     case "luckperms_prefix": formattedMessage.append(lpText); break;
                     case "player_name": formattedMessage.append(nameText); break;
                     case "message": formattedMessage.append(msgText); break;
-                    default: formattedMessage.append(Text.literal("%" + p + "%").formatted(cfg.getFormatting()));
+                    default: formattedMessage.append(Text.literal("%" + p + "%").setStyle(cfg.getStyle()));
                 }
             } else {
                 if (!parts[i].isEmpty()) {
-                    formattedMessage.append(Text.literal(parts[i]).formatted(cfg.getFormatting()));
+                    formattedMessage.append(Text.literal(parts[i]).setStyle(cfg.getStyle()));
                 }
             }
         }

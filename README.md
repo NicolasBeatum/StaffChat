@@ -39,11 +39,12 @@ Puedes usar los comandos de dos maneras:
 - `/staffchatreload` (Permiso: `staffchat.reload`, por defecto Nivel 3) -> Recarga el archivo de configuración `.json` al instante sin reiniciar el servidor.
 
 ---
-
 ## ⚙️ Configuración (`config/staffchat.json`)
 
 El mod generará un archivo fácil de modificar en tu carpeta `config/`. 
 Puedes utilizar el comodín `%luckperms_prefix%` para que el mod lea tu rango automáticamente, o personalizar tu propio prefijo (`%prefix%`).
+
+Soporta colores estándar de Minecraft (**AQUA, RED, GREEN, etc.**) y códigos **RGB (Hexadecimal)** como `#55FF55`.
 
 ```json
 {
@@ -51,13 +52,15 @@ Puedes utilizar el comodín `%luckperms_prefix%` para que el mod lea tu rango au
     "staffchat": {
       "command": "staffchat",
       "prefix": "⚒ Staff",
-      "color": "AQUA"
+      "color": "#00FFFF"
     },
     "modchat": {
       "command": "modchat",
       "prefix": "🛡 Mod",
       "color": "GREEN"
     },
+...
+
     "adminchat": {
       "command": "adminchat",
       "prefix": "👑 Admin",
